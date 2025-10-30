@@ -1,5 +1,8 @@
 package Activity4;
 import java.util.List;
+
+import Activity3.Shuffler3;
+
 import java.util.ArrayList;
 
 /**
@@ -63,7 +66,12 @@ public class Deck4 {
 	 * and reset the size to represent the entire deck.
 	 */
 	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		int[] old = new int[52];
+		for (int i = 0; i < 52; i++) {
+			old[i] = i;
+		}
+		Shuffler3.selectionShuffle(old);
+		List<Card4> newCards = new ArrayList<Card4>();
 		this.size = 0; // remove me
 	}
 

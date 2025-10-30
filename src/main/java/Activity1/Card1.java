@@ -5,22 +5,9 @@ package Activity1;
  * <code>Card</code> represents a playing card.
  */
 public class Card1 {
-
-	/**
-	 * String value that holds the suit of the card
-	 */
 	private String suit;
-
-	/**
-	 * String value that holds the rank of the card
-	 */
 	private String rank;
-
-	/**
-	 * int value that holds the point value.
-	 */
 	private int pointValue;
-
 
    /**
 	 * Creates a new <code>Card</code> instance.
@@ -33,37 +20,23 @@ public class Card1 {
 	 *                  containing the point value of the card
 	 */
 	public Card1(String cardRank, String cardSuit, int cardPointValue) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
+		this.suit = cardSuit;
+		this.rank = cardRank;
+		this.pointValue = cardPointValue;
 	}
 
-
 	/**
-	 * Accesses this <code>Card's</code> suit.
-	 * @return this <code>Card's</code> suit.
+	 * Accessors for Card's three instance variables.
+	 * @return this <code>Card's</code> instance_var.
 	 */
 	public String suit() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
-		return "";
+		return this.suit;
    }
-
-	/**
-	 * Accesses this <code>Card's</code> rank.
-	 * @return this <code>Card's</code> rank.
-	 */
 	public String rank() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
-		return "";
-
+		return this.rank;
 	}
-
-   /**
-	 * Accesses this <code>Card's</code> point value.
-	 * @return this <code>Card's</code> point value.
-	 */
 	public int pointValue() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
-		return -1;
-
+		return this.pointValue;
 	}
 
 	/** Compare this card with the argument.
@@ -73,7 +46,9 @@ public class Card1 {
 	 *         false otherwise.
 	 */
 	public boolean matches(Card1 otherCard) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
+		if (otherCard.rank.equals(this.rank) && otherCard.suit.equals(this.suit) && otherCard.pointValue == this.pointValue) {
+			return true;
+		}
 		return false;
 	}
 
@@ -89,8 +64,7 @@ public class Card1 {
 	 */
 	@Override
 	public String toString() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
-		return "";
+		return this.rank + " of " + this.suit + " (point value = " + this.pointValue + ")";
 
 	}
 }

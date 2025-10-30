@@ -9,18 +9,12 @@ import java.util.ArrayList;
  */
 public class Deck2 {
 
-	/**
-	 * cards contains all the cards in the deck.
-	 */
 	private List<Card2> cards;
-
 	/**
 	 * size is the number of not-yet-dealt cards.
 	 * Cards are dealt from the top (highest index) down.
-	 * The next card to be dealt is at size - 1.
 	 */
 	private int size;
-
 
 	/**
 	 * Creates a new <code>Deck</code> instance.<BR>
@@ -31,28 +25,31 @@ public class Deck2 {
 	 * @param values is an array containing all of the card point values.
 	 */
 	public Deck2(String[] ranks, String[] suits, int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		cards = new ArrayList<Card2>();
+		for (int i = 0; i < Math.min(Math.min(ranks.length, suits.length), values.length); i++) {
+			cards.add(new Card2(ranks[i], suits[i], values[i]));
+			size++;
+		}
 	}
-
 
 	/**
 	 * Determines if this deck is empty (no undealt cards).
-	 * @return true if this deck is empty, false otherwise.
+	 * @return true if this size == 0, false otherwise.
 	 */
 	public boolean isEmpty() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return true;
+		if (size == 0) {
+			return true;
+		}
+		return false;
 	}
-
 	/**
 	 * Accesses the number of undealt cards in this deck.
-	 * @return the number of undealt cards in this deck.
+	 * @return size.
 	 */
 	public int size() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return -1;
+		return size;
 	}
-
+	
 	/**
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
@@ -67,8 +64,11 @@ public class Deck2 {
 	 *         previously dealt.
 	 */
 	public Card2 deal() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return new Card2("","",-1);
+		if (isEmpty()) {
+			return null;
+		}
+		size--;
+		return cards.get(size);
 	}
 
 	/**

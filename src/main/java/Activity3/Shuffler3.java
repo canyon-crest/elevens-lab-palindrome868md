@@ -1,4 +1,7 @@
 package Activity3;
+
+import Activity2.Card2;
+
 /**
  * This class provides a convenient way to test shuffling methods.
  */
@@ -8,8 +11,7 @@ public class Shuffler3 {
 	 * The number of consecutive shuffle steps to be performed in each call
 	 * to each sorting procedure.
 	 */
-	private static final int SHUFFLE_COUNT = 1;
-
+	private static final int SHUFFLE_COUNT = 3;
 
 	/**
 	 * Tests shuffling methods.
@@ -41,6 +43,7 @@ public class Shuffler3 {
 			System.out.println();
 		}
 		System.out.println();
+		System.out.println(arePermutations(values1, values2));
 	}
 
 
@@ -51,7 +54,20 @@ public class Shuffler3 {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int[] shuffled = new int[values.length];
+		int k = 0;
+		for (int j = 0; j < (values.length+1)/2; j++) {
+			shuffled[k] = values[j];
+			k += 2;
+		}
+		k = 1;
+		for (int j = (values.length+1)/2; j < values.length; j++) {
+			shuffled[k] = values[j];
+			k += 2;
+		}
+		for (int i = 0; i < values.length; i++) {
+			values[i] = shuffled[i];
+		}
 	}
 
 	/**
@@ -66,6 +82,50 @@ public class Shuffler3 {
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
 	public static void selectionShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		for (int k = values.length-1; k >= 0; k--) {
+			int r = (int) (Math.random() * k);
+			int temp = values[k];
+			values[k] = values[r];
+			values[r] = temp;
+		}
+	}
+	
+	/**
+	 * Flips a coin that turns up heads (true) two-thirds of the time.
+	 */
+	public static boolean flip() {
+	    int r = (int) (Math.random() * 3);
+	    if (r == 0) {
+	        return false;
+	    } else {
+	        return true;
+	    }
+	}
+	
+	/**
+	 * Detects if two arrays are permutations of each other.
+	 */
+	public static boolean arePermutations(int[] one, int[] two) {
+		if (one.length != two.length) {
+			return false;
+		}
+		boolean[] used = new boolean[two.length];
+		for (int i = 0; i < one.length; i++) {
+			int index = -1;
+			for (int j = 0; j < two.length; j++) {
+				if (used[j]) {
+					continue;
+				}
+				if (one[i] == two[j]) {
+					index = j;
+					break;
+				}
+			}
+			if (index == -1) {
+				return false;
+			}
+			used[index] = true;
+		}
+		return true;
 	}
 }
