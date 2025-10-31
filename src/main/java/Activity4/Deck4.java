@@ -66,19 +66,19 @@ public class Deck4 {
 	 * and reset the size to represent the entire deck.
 	 */
 	public void shuffle() {
-		int[] old = new int[cards.length];
-		for (int i = 0; i < cards.length; i++) {
+		int[] old = new int[cards.size()];
+		for (int i = 0; i < cards.size(); i++) {
 			old[i] = i;
 		}
 		Shuffler3.selectionShuffle(old);
 		List<Card4> newCards = new ArrayList<Card4>();
-		for (int i = 0; i < cards.length; i++) {
-			newCards.set(i, cards.get(old[i]));
+		for (int i = 0; i < cards.size(); i++) {
+			newCards.add(cards.get(old[i]));
 		}
-		for (int i = 0; i < cards.length; i++) {
+		for (int i = 0; i < cards.size(); i++) {
 			cards.set(i, newCards.get(i));
 		}
-		this.size = cards.length;
+		this.size = cards.size();
 	}
 
 	/**

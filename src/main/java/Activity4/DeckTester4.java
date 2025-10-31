@@ -53,5 +53,13 @@ public class DeckTester4 {
 		System.out.println();
 
 		/* *** TO BE COMPLETED IN ACTIVITY 4 *** */
+		System.out.println("**** Activity 4 Added Test Code ****");
+		String[] ranks2 = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"};
+		String[] suits2 = {"hearts", "diamonds", "clubs", "spades"};
+		int[] pointValues2 = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
+		Deck4 d52 = new Deck4(ranks2, suits2, pointValues2);
+		System.out.println(d52);
+		d52.shuffle();
+		System.out.println(d52);
 	}
 }
