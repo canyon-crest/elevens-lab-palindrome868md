@@ -26,9 +26,12 @@ public class Deck2 {
 	 */
 	public Deck2(String[] ranks, String[] suits, int[] values) {
 		cards = new ArrayList<Card2>();
-		for (int i = 0; i < Math.min(Math.min(ranks.length, suits.length), values.length); i++) {
-			cards.add(new Card2(ranks[i], suits[i], values[i]));
-			size++;
+		for (int i = 0; i < ranks.length; i++) {
+			for (int j = 0; j < suits.length; j++) {
+				Card2 newCard = new Card2(ranks[i], suits[j], values[i]);
+				cards.add(newCard);
+				size++;
+			}
 		}
 	}
 

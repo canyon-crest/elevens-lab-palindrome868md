@@ -48,11 +48,10 @@ public class ElevensBoard11 extends Board11 {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		if (selectedCards.size() == 2) {
 			return findPairSum11(selectedCards).size() > 0;
 		} else if (selectedCards.size() == 3) {
-			return containsJQK(selectedCards);
+			return findJQK(selectedCards).size() > 0;
 		} else {
 			return false;
 		}
@@ -69,7 +68,7 @@ public class ElevensBoard11 extends Board11 {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		List<Integer> cIndexes = cardIndexes();
-		return (findPairSum11(cIndexes).size() > 0) || containsJQK(cIndexes);
+		return (findPairSum11(cIndexes).size() > 0) || findJQK(cIndexes).size() > 0;
 	}
 
 	/**
@@ -104,22 +103,28 @@ public class ElevensBoard11 extends Board11 {
 	 * @return a list of the indexes of a JQK, if a JQK was found;
 	 *         an empty list, if a JQK was not found.
 	 */
-	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE CHANGED INTO findJQK IN ACTIVITY 11 *** */
-		boolean foundJack = false;
-		boolean foundQueen = false;
-		boolean foundKing = false;
+	private List<Integer> findJQK(List<Integer> selectedCards) {
+		int foundJack = -1;
+		int foundQueen = -1;
+		int foundKing = -1;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
-				foundJack = true;
+				foundJack = k;
 			} else if (cardAt(k).rank().equals("queen")) {
-				foundQueen = true;
+				foundQueen = k;
 			} else if (cardAt(k).rank().equals("king")) {
-				foundKing = true;
+				foundKing = k;
 			}
 		}
-		return foundJack && foundQueen && foundKing;
+		if (foundJack >= 0 && foundQueen >= 0 && foundKing >= 0) {
+			List<Integer> ans = new ArrayList<Integer>();
+			ans.add(foundJack);
+			ans.add(foundQueen);
+			ans.add(foundKing);
+			return ans;
+		}
+		return new ArrayList<Integer>();
 	}
 
 	/**
@@ -127,8 +132,10 @@ public class ElevensBoard11 extends Board11 {
 	 * @return true if a legal play was found (and made); false othewise.
 	 */
 	public boolean playIfPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		if (playPairSum11IfPossible() || playJQKIfPossible()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -138,8 +145,13 @@ public class ElevensBoard11 extends Board11 {
 	 * @return true if an 11-pair play was found (and made); false othewise.
 	 */
 	private boolean playPairSum11IfPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		 return false; // REPLACE !
+		List<Integer> temp = super.cardIndexes();
+		List<Integer> tempResult = findPairSum11(temp);
+		if (tempResult.size() > 0) {
+			super.replaceSelectedCards(tempResult);
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -149,7 +161,12 @@ public class ElevensBoard11 extends Board11 {
 	 * @return true if a JQK play was found (and made); false othewise.
 	 */
 	private boolean playJQKIfPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> temp = super.cardIndexes();
+		List<Integer> tempResult = findJQK(temp);
+		if (tempResult.size() > 0) {
+			super.replaceSelectedCards(tempResult);
+			return true;
+		}
+		return false;
 	}
 }
